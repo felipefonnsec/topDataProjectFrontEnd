@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Lista de Usuários</h2>
+
+      <div class="filters">
+        <div class="form-group">
+          <label for="nameFilter">Filtrar por Nome:</label>
+          <input type="text" class="form-control" id="nameFilter" [(ngModel)]="filtroNome" (input)="applyFilters()">
+        </div>
+        <div class="form-group">
+          <label for="emailFilter">Filtrar por Email:</label>
+          <input type="text" class="form-control" id="emailFilter" [(ngModel)]="filtroEmail" (input)="applyFilters()">
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let usuario of usuariosFiltrados | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: user }">
+          {{ usuario.name }} - {{ usuario.email }}
+          <button class="btn btn-primary btn-sm" (click)="showDetails(usuario)">Detalhes</button>
+        </li>
+      </ul>
+      <div class="paginas">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+      <nav aria-label="Page navigation example">
+        <button class="btn btn-primary btn-sm" (click)="exit()">Sair</button>
+      </nav>
+    </div>
+  </div>
+</div>
